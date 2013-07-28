@@ -8,10 +8,7 @@ class Result {
 
 	// Constructor - open DB connection
 	function __construct() {
-	        // Include db user/pass vars
-       		include("/etc/mysql/pw.php") ;
-
-		$this->db = new mysqli('localhost', $dbuser, $dbpasswd, 'list');
+		$this->db = new mysqli('localhost', 'adminF2Jbm2B', 'nCi6Du5zhr4B' , 'santaslist');
 		/* check connection */
 		if (mysqli_connect_errno()) {
 			printf("Connect failed: %s\n", mysqli_connect_error());
