@@ -186,7 +186,7 @@ class Result {
 		echo "\n" ;
 
 		$this->jsonResponse =  array("app" => "slist", "stat" => $this->array_appender) ;
-		echo json_encode($this->jsonResponse, JSON_PRETTY_PRINT) ;
+		echo json_encode($this->jsonResponse) ;
 	}
 }
 	

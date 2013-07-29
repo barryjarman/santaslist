@@ -47,7 +47,7 @@ class RedeemAPI {
 				array_push($shared_result, $jsonRow) ;
 			}
 			$this->array_appender =  array("name" => "shared_result" , "description" => "Share Code Results for ${shared_code}", "type" => "shared_code", "data" => $shared_result ) ;
-			echo json_encode($this->array_appender, JSON_PRETTY_PRINT) ;
+			echo json_encode($this->array_appender) ;
 		}
 	}
 
