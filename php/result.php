@@ -8,7 +8,7 @@ class Result {
 
 	// Constructor - open DB connection
 	function __construct() {
-		$this->db = new mysqli('localhost', 'adminF2Jbm2B', 'nCi6Du5zhr4B' , 'santaslist');
+		$this->db = new mysqli('127.2.185.130', 'adminF2Jbm2B', 'nCi6Du5zhr4B' , 'santaslist');
 		/* check connection */
 		if (mysqli_connect_errno()) {
 			printf("Connect failed: %s\n", mysqli_connect_error());
