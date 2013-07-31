@@ -32,7 +32,7 @@ class RedeemAPI {
 			$shared_code = $_POST["shared_code"] ;
 #			$shared_code = $shared ;
 			// Following SQL ensures that only unique child names are returned (last updated)
-			$query = "select pref_id, name, toy, age, status, update_time from ( select * from prefs order by update_time DESC) tmp GROUP BY pref_id ORDER BY pref_id ;" ;
+			$query = "select pref_id, name, toy, age, status, update_time from ( select * from prefs order by update_time DESC) tmp WHERE share_code = '${share_code}' GROUP BY pref_id ORDER BY pref_id ;" ;
 			$result = $this->db->query($query) or die(mysql_error());
 			$shared_result = array() ;
 
