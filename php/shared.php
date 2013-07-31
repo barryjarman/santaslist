@@ -13,10 +13,7 @@ class RedeemAPI {
 
 	// Constructor - open DB connection
 	function __construct() {
-		// Include db user/pass vars
-		include("/etc/mysql/pw.php") ;
-
-		$this->db = new mysqli('localhost', $dbuser, $dbpasswd, 'list');
+		$this->db = new mysqli('127.2.185.130', 'adminF2Jbm2B', 'nCi6Du5zhr4B' , 'santaslist');
 		$this->db->autocommit(FALSE);
 	}
 
