@@ -13,7 +13,10 @@ class RedeemAPI {
 
 	// Constructor - open DB connection
 	function __construct() {
-                $this->db = new mysqli('127.2.185.130', 'adminF2Jbm2B', 'nCi6Du5zhr4B' , 'santaslist');
+		// Include db user/pass vars
+		include("/etc/mysql/pw.php") ;
+
+		$this->db = new mysqli('localhost', $dbuser, $dbpasswd, 'list');
 		$this->db->autocommit(FALSE);
 	}
 
@@ -25,14 +28,14 @@ class RedeemAPI {
 	// Main method to redeem a code
 	function redeem() {
 #	$shared="N6L8E29F" ;
-#	$shared="" ;
+	$shared="" ;
 
 		// Check for required parameters
 		if ((isset($_POST["shared_code"])) || ( $shared != "" ) ) {
 			$shared_code = $_POST["shared_code"] ;
 #			$shared_code = $shared ;
 			// Following SQL ensures that only unique child names are returned (last updated)
-			$query = "select name, toy, age, status from ( select * from prefs order by update_time DESC) tmp WHERE shared_code = '${shared_code}' GROUP BY name ORDER BY name ;" ;
+			$query = "select pref_id, name, toy, age, status, update_time from ( select * from prefs order by update_time DESC) tmp GROUP BY pref_id ORDER BY pref_id ;" ;
 			$result = $this->db->query($query) or die(mysql_error());
 			$shared_result = array() ;
 
@@ -47,7 +50,14 @@ class RedeemAPI {
 				array_push($shared_result, $jsonRow) ;
 			}
 			$this->array_appender =  array("name" => "shared_result" , "description" => "Share Code Results for ${shared_code}", "type" => "shared_code", "data" => $shared_result ) ;
-			echo json_encode($this->array_appender) ;
+
+			$phpver = substr(phpversion(),0,3) ;
+			if ( $phpver >= 5.4 ) {
+				echo json_encode($this->array_appender, JSON_PRETTY_PRINT) ;
+			} else {
+				echo json_encode($this->array_appender) ;
+			}
+
 		}
 	}
 
