@@ -41,7 +41,8 @@ class Result {
 		}
 		
 		
-		$query = "SELECT * FROM prefs" ;
+#		$query = "SELECT * FROM prefs" ;
+		$query = "SELECT id,device_id,shared_code,pref_id,name,age,toy,status,CONVERT_TZ( update_time, '+00:00', '+05:00') FROM prefs order by update_time DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
