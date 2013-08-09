@@ -28,6 +28,7 @@ class Result {
 
 	// Main method to redeem a prefs
 	function prefs() {
+		echo "<H4>prefs/uses</H4>" ;
 		$hquery = "SHOW COLUMNS FROM prefs" ;
 		$headings = $this->db->query($hquery) or die(mysql_error());
 
@@ -41,7 +42,6 @@ class Result {
 		}
 		
 		
-#		$query = "SELECT * FROM prefs" ;
 		$query = "SELECT id,device_id,shared_code,pref_id,name,age,toy,status,CONVERT_TZ( update_time, '+00:00', '+05:00') FROM prefs order by update_time DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
@@ -61,6 +61,7 @@ class Result {
 
 	// Main method to redeem a uses
 	function tracking() {
+		echo "<H4>tracking/uses</H4>" ;
 		$hquery = "SHOW COLUMNS FROM tracking" ;
 		$headings = $this->db->query($hquery) or die(mysql_error());
 
@@ -74,7 +75,7 @@ class Result {
 		}
 		
 		
-		$query = "SELECT * FROM tracking" ;
+		$query = "SELECT id, device_id, uses, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM tracking" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($trow = $result->fetch_row()) {
@@ -91,6 +92,7 @@ class Result {
 
 	# Method to display phone data
 	function phone() {
+		echo "<H4>phone</H4>" ;
 		$hquery = "SHOW COLUMNS FROM phone" ;
 		$headings = $this->db->query($hquery) or die(mysql_error());
 
@@ -104,7 +106,7 @@ class Result {
 		}
 		
 		
-		$query = "SELECT * FROM phone" ;
+		$query = "SELECT id, device_id, make, model, country, sdk, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM phone" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($trow = $result->fetch_row()) {
@@ -119,6 +121,7 @@ class Result {
 
 	// Method to return top 10 toys
 	function top10toys() {
+		echo "<H4>top10toys</H4>" ;
 		/* Create Table */
 		echo "<table border=1>" ;
 		
@@ -141,6 +144,7 @@ class Result {
 
 	// Method to return top 10 toys in 2013
 	function top10toys_by_year($year) {
+		echo "<H4>top10toys_by_year($year)</H4>" ;
 		/* Create Table */
 		echo "<table border=1>" ;
 		
@@ -163,6 +167,7 @@ class Result {
 
 	// Method to return percentage of good and bad list
 	function good_and_bad_percentage() {
+		echo "<H4>good_and_bad_percentage</H4>" ;
 		/* Create Table */
 		echo "<table border=1>" ;
 		
