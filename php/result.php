@@ -65,7 +65,7 @@ class Result {
 		echo "<th>Date</th><th>Count</th>" ;
 		
 		
-		$query = "select DATE(update_time), count(*) from prefs group by day(update_time), month(update_time) order by update_time ;" ;
+		$query = "select DATE(update_time), count(*) from prefs group by day(update_time), month(update_time) order by update_time LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
