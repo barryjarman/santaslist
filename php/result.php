@@ -55,9 +55,28 @@ class Result {
 		$result->close() ;
 	}
 
-
-
-
+	// Main method to redeem count of pref updates per day
+	function pref_updates() {
+		echo "<H4>Pref updates count</H4>" ;
+		/* Create Table */
+		echo "<table border=1>" ;
+		
+		/* fetch column names */
+		echo "<th>Date</th><th>Count</th>" ;
+		
+		
+		$query = "select DATE(update_time), count(*) from prefs group by day(update_time), month(update_time) desc ;" ;
+		$result = $this->db->query($query) or die(mysql_error());
+		/* fetch object array */
+		while ($row = $result->fetch_row()) {
+			echo "<tr>" ;
+			printf ("<td>%s</td><td>%s</td>", $row[0], $row[1]);
+			echo "</tr>" ;
+		}
+		echo "</table>" ;
+		
+		$result->close() ;
+	}
 
 	// Main method to redeem a uses
 	function tracking() {
@@ -106,7 +125,7 @@ class Result {
 		}
 		
 		
-		$query = "SELECT id, device_id, make, model, country, sdk, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM phone order by update_time DESC LIMIT 10" ;
+		$query = "SELECT id, device_id, make, model, country, sdk, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM phone" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($trow = $result->fetch_row()) {
@@ -197,5 +216,6 @@ $api->phone();
 $api->top10toys();
 $api->top10toys_by_year(2013);
 $api->good_and_bad_percentage();
+$api->pref_updates();
 
 ?>
