@@ -125,7 +125,7 @@ class Result {
 		}
 		
 		
-		$query = "SELECT id, device_id, make, model, country, sdk, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM phone" ;
+		$query = "SELECT id, device_id, make, model, country, sdk, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM phone order by update_time DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($trow = $result->fetch_row()) {
