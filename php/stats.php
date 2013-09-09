@@ -41,7 +41,7 @@ class Result {
                                        );
 			array_push($percent_good_bad, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "percent_good_bad" , "description" => "GN Percentage", "type" => "percent", "data" => $percent_good_bad )) ;
+		array_push($this->array_appender, array("name" => "percent_good_bad" , "description" => "List Percentages", "type" => "percent", "data" => $percent_good_bad )) ;
 	}
 
 	// Method to return top 10 toys
