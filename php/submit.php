@@ -9,7 +9,7 @@ class RedeemAPI {
 
     // Constructor - open DB connection
     function __construct() {
-        $this->db = new mysqli('127.2.185.130', 'adminF2Jbm2B', 'nCi6Du5zhr4B' , 'santaslist');
+	$this->db = new mysqli('127.2.185.130', 'adminF2Jbm2B', 'nCi6Du5zhr4B' , 'santaslist');
         $this->db->autocommit(FALSE);
     }
 
@@ -28,12 +28,12 @@ class RedeemAPI {
             if ($function == "prefupdate") {
                     // Put parameters into local variables
                    $device_id = $_POST["device_id"];
+		   $shared_code = $_POST["shared_code"];
                    $pref_id = $_POST["pref_id"];
                    $name = strtolower($_POST["name"]);
                    $toy = strtolower($_POST["toy"]);
                    $age = $_POST["age"];
                    $status = $_POST["status"];
-                   $shared_code = $_POST["shared_code"];
                    if ($status == "Good") {
                          $stat="G" ;
                    } else {
@@ -54,11 +54,12 @@ class RedeemAPI {
                    $model = $_POST["model"];
                    $country = $_POST["country"];
                    $sdk = $_POST["sdk"];
+                   $app_version = $_POST["app_version"];
 
                     // Add entry to database
-                    echo "Adding Entry to DB $device_id:$make:$model:$country:$sdk\n";
-                    $stmt = $this->db->prepare("INSERT INTO phone (device_id, make, model, country, sdk) VALUES (?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssssi", $device_id, $make, $model, $country, $sdk);
+                    echo "Adding Entry to DB $device_id:$make:$model:$country:$sdk:$app_version\n";
+                    $stmt = $this->db->prepare("INSERT INTO phone (device_id, make, model, country, sdk, app_version) VALUES (?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("ssssii", $device_id, $make, $model, $country, $sdk, $app_version);
                     $stmt->execute();
                     $stmt->close();
             }
