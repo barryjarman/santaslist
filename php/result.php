@@ -125,12 +125,12 @@ class Result {
 		}
 		
 		
-		$query = "SELECT id, device_id, make, model, country, sdk, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM phone order by update_time DESC LIMIT 10 ;" ;
+		$query = "SELECT id, device_id, make, model, country, sdk, app_version, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM phone order by update_time DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($trow = $result->fetch_row()) {
 			echo "<tr>" ;
-			printf ("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>", $trow[0], $trow[1], $trow[2], $trow[3], $trow[4], $trow[5], $trow[6]);
+			printf ("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>", $trow[0], $trow[1], $trow[2], $trow[3], $trow[4], $trow[5], $trow[6], $trow[7]);
 			echo "</tr>" ;
 		}
 		echo "</table>" ;
