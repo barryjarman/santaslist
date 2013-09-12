@@ -86,7 +86,7 @@ class Result {
 		if ( $status == "g" ) {
 			$comment = "Good" ;
 		} else {
-			$comment = "Bad" ;
+			$comment = "Naughty" ;
 		}
 		$query = "select name, count(*) as cnt from prefs where name <> '' AND status='$status' group by name order by cnt desc limit 10;" ;
                 $result = $this->db->query($query) or die(mysql_error());
@@ -101,7 +101,7 @@ class Result {
                                        );
 			array_push($top10_kids_name_status, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_kids_name_status", "description" => "Top 10 ${comment} Kids Names", "type" => "name","data" => $top10_kids_name_status )) ;
+		array_push($this->array_appender, array("name" => "top10_kids_name_status", "description" => "Top 10 Names on ${comment} List", "type" => "name","data" => $top10_kids_name_status )) ;
 	}
 
 	// Method to return top 10 toys in year
@@ -144,7 +144,7 @@ class Result {
 	// Method to return top 10 toys wanted by kids with certain status
 	function f_top10_toys_status($status) {
 		if ( $status == "n" ) {
-			$comment = "Bad" ;
+			$comment = "Naughty" ;
 		} else {
 			$comment = "Good" ;
 		}
@@ -208,10 +208,10 @@ $api->f_top10_toys_time("1 DAY", "Past day", "day");
 # list good bad percentages
 $api->f_percent_good_bad();
 
-# Top 10 kids who are good
+# Top 10 names on good list
 $api->f_top10_kids_name_status('g');
 
-# Top 10 kids names who are bad?
+# Top 10 names on naughty list
 $api->f_top10_kids_name_status('n');
 
 # List top 10 toys 2013
@@ -233,7 +233,7 @@ $api->f_top10_toys_age(3,6);
 $api->f_top10_toys_age(6,9);
 
 # List top 10 toys this year in USA
-$api->f_top10_toys_year_country(date("Y"),"USA");
+$api->f_top10_toys_year_country(date("Y"),"US");
 
 $api->return_json();
 
