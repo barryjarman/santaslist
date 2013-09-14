@@ -36,9 +36,11 @@ class RedeemAPI {
                    $status = $_POST["status"];
                    if ($status == "Good") {
                          $stat="G" ;
-                   } else {
+                   } else if ( $status == "Naughty") {
                          $stat="N" ;
-                   }
+                   } else {
+                         $stat="R" ;
+	           }
                     // Add entry to database
                     echo "Adding Entry to DB $device_id:$shared_code:$pref_id:$name:$toy:$age:$status($stat)\n";
                     $stmt = $this->db->prepare("INSERT INTO prefs (device_id, shared_code, pref_id, name, toy, age, status) VALUES (?, ?, ?, ?, ?, ?, ?)");

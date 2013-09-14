@@ -27,7 +27,7 @@ class Result {
 
 	// Method to return percentage of good and bad list
 	function f_percent_good_bad() {
-		$query = "select status, count(status) as Total, count(status) / (select count(status) from prefs) * 100 as Percent from prefs group by status ;" ;
+		$query = "select status, count(status) as Total , count(status) / (select count(status) from prefs where status = 'g' or status = 'n') * 100 as Percent from prefs where status = 'g' or status = 'n' group by status ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($percent_good_bad) ;
 		$percent_good_bad = array() ;
