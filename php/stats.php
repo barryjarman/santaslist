@@ -46,7 +46,7 @@ class Result {
 
 	// Method to return top 10 toys
 	function f_top10_toys() {
-		$query = "select toy,count(*) as cnt from prefs where toy <> '' group by toy order by cnt DESC LIMIT 10 ;" ;
+		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND device_id not in (select device_id from banned) group by toy order by cnt DESC LIMIT 10 ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_toys) ;
 		$top10_toys = array() ;
@@ -65,7 +65,7 @@ class Result {
 	// Method to return top 10 toys
 	function f_top10_toys_time($time,$comment,$substring) {
 		if ( $time == "" ) { $time = "1 YEAR" ; } 
-		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND update_time > DATE_SUB(NOW(), INTERVAL $time) group by toy order by cnt DESC LIMIT 10 ;" ;
+		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND update_time > DATE_SUB(NOW(), INTERVAL $time) AND device_id not in (select device_id from banned) group by toy order by cnt DESC LIMIT 10 ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_toys) ;
 		$top10_toys_time = array() ;
@@ -88,7 +88,7 @@ class Result {
 		} else {
 			$comment = "Naughty" ;
 		}
-		$query = "select name, count(*) as cnt from prefs where name <> '' AND status='$status' group by name order by cnt desc limit 10;" ;
+		$query = "select name, count(*) as cnt from prefs where name <> '' AND status='$status' AND device_id not in (select device_id from banned) group by name order by cnt desc limit 10;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_kids_name_status) ;
 		$top10_kids_name_status = array() ;
@@ -106,7 +106,7 @@ class Result {
 
 	// Method to return top 10 toys in year
 	function f_top10_toys_year($year) {
-		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND YEAR (update_time) = '$year' group by toy order by cnt DESC LIMIT 10 ;" ;
+		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND YEAR (update_time) = '$year' AND device_id not in (select device_id from banned) group by toy order by cnt DESC LIMIT 10 ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_toys_year) ;
 		$top10_toys_year = array() ;
@@ -124,8 +124,7 @@ class Result {
 
 	// Method to return top 10 toys in year
 	function f_top10_toys_year_country($year,$country) {
-		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND YEAR (update_time) = $year and country = $country group by toy order by cnt DESC LIMIT 10 ;" ;
-		$query = "select prefs.toy,count(*) as cnt from prefs,phone  where toy <> '' AND phone.country='$country' and prefs.device_id = phone.device_id group by toy order by cnt desc limit 10 ;" ;
+		$query = "select prefs.toy,count(*) as cnt from prefs,phone  where toy <> '' AND phone.country='$country' AND prefs.device_id = phone.device_id AND device_id not in (select device_id from banned) group by toy order by cnt desc limit 10 ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_toys_year_country) ;
 		$top10_toys_year_country = array() ;
@@ -148,7 +147,7 @@ class Result {
 		} else {
 			$comment = "Good" ;
 		}
-		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND status = 'g' group by toy order by cnt DESC LIMIT 10 ;" ;
+		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND status = 'g' AND device_id not in (select device_id from banned) group by toy order by cnt DESC LIMIT 10 ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_toys_status) ;
 		$top10_toys_status = array() ;
@@ -166,7 +165,7 @@ class Result {
 
 	// Method to return top 10 toys for kids from/to
 	function f_top10_toys_age($from, $to) {
-		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND age >= $from and age <= $to group by toy order by cnt DESC LIMIT 10 ;" ;
+		$query = "select toy,count(*) as cnt from prefs where toy <> '' AND age >= $from and age <= $to AND device_id not in (select device_id from banned) group by toy order by cnt DESC LIMIT 10 ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_toys_age) ;
 		$top10_toys_age = array() ;
