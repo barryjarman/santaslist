@@ -124,7 +124,7 @@ class Result {
 
 	// Method to return top 10 toys in year
 	function f_top10_toys_year_country($year,$country) {
-		$query = "select prefs.toy,count(*) as cnt from prefs,phone  where toy <> '' AND phone.country='$country' AND prefs.device_id = phone.device_id AND device_id not in (select device_id from banned) group by toy order by cnt desc limit 10 ;" ;
+		$query = "select prefs.toy,count(*) as cnt from prefs,phone  where toy <> '' AND phone.country='$country' AND prefs.device_id = phone.device_id AND prefs.device_id not in (select device_id from banned) group by toy order by cnt desc limit 10 ;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_toys_year_country) ;
 		$top10_toys_year_country = array() ;
