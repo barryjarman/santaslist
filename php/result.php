@@ -42,12 +42,12 @@ class Result {
 		}
 		
 		
-		$query = "SELECT id,device_id,shared_code,pref_id,name,age,toy,status,CONVERT_TZ( update_time, '+00:00', '+05:00') FROM prefs order by update_time DESC LIMIT 10 ;" ;
+		$query = "SELECT id,device_id,shared_code,pref_id,name,age,toy,photo,status,CONVERT_TZ( update_time, '+00:00', '+05:00') FROM prefs order by update_time DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
 			echo "<tr>" ;
-			printf ("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>", $row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8]);
+			printf ("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>", $row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9]);
 			echo "</tr>" ;
 		}
 		echo "</table>" ;

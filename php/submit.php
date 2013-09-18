@@ -33,6 +33,7 @@ class RedeemAPI {
                    $name = strtolower($_POST["name"]);
                    $toy = strtolower($_POST["toy"]);
                    $age = $_POST["age"];
+                   $photo = $_POST["photo"];
                    $status = $_POST["status"];
                    if ($status == "Good") {
                          $stat="G" ;
@@ -40,11 +41,11 @@ class RedeemAPI {
                          $stat="N" ;
                    } else {
                          $stat="R" ;
-	           }
+                   }
                     // Add entry to database
                     echo "Adding Entry to DB $device_id:$shared_code:$pref_id:$name:$toy:$age:$status($stat)\n";
-                    $stmt = $this->db->prepare("INSERT INTO prefs (device_id, shared_code, pref_id, name, toy, age, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssissis", $device_id, $shared_code, $pref_id, $name, $toy, $age, $stat);
+                    $stmt = $this->db->prepare("INSERT INTO prefs (device_id, shared_code, pref_id, name, toy, age, photo, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("ssississ", $device_id, $shared_code, $pref_id, $name, $toy, $age, $photo, $stat);
                     $stmt->execute();
                     $stmt->close();
             }
