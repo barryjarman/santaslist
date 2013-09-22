@@ -88,7 +88,7 @@ class Result {
 		} else {
 			$comment = "Naughty" ;
 		}
-		$query = "select name, count(*) as cnt from prefs where name <> '' AND status='$status' AND device_id not in (select device_id from banned) group by name order by cnt desc limit 10;" ;
+		$query = "select SUBSTRING_INDEX(name,' ',1), count(*) as cnt from prefs where name <> '' AND status='$status' AND device_id not in (select device_id from banned) group by name order by cnt desc limit 10;" ;
                 $result = $this->db->query($query) or die(mysql_error());
 		unset($top10_kids_name_status) ;
 		$top10_kids_name_status = array() ;
