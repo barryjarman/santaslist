@@ -94,7 +94,7 @@ class Result {
 		}
 		
 		
-		$query = "SELECT id, device_id, uses, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM tracking" ;
+		$query = "SELECT id, device_id, uses, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM tracking order by update_time" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($trow = $result->fetch_row()) {
