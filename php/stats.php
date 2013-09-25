@@ -60,7 +60,7 @@ class Result {
                                        );
 			array_push($top10_toys, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_toys", "description" => "Top 10 Toys", "type" => "toy", "data" => $top10_toys )) ;
+		array_push($this->array_appender, array("name" => "top10_toys", "description" => "Top Toys", "type" => "toy", "data" => $top10_toys )) ;
 	}
 
 	// Method to return top 10 toys
@@ -79,7 +79,7 @@ class Result {
                                        );
 			array_push($top10_toys_time, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_toys_time_${substring}", "description" => "Top 10 Toys $comment", "type" => "toy", "data" => $top10_toys_time )) ;
+		array_push($this->array_appender, array("name" => "top10_toys_time_${substring}", "description" => "Top Toys $comment", "type" => "toy", "data" => $top10_toys_time )) ;
 	}
 
 	// Method to return top 10 kids who are bad
@@ -102,7 +102,7 @@ class Result {
                                        );
 			array_push($top10_kids_name_status, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_kids_name_status", "description" => "Top 10 Names on ${comment} List", "type" => "name","data" => $top10_kids_name_status )) ;
+		array_push($this->array_appender, array("name" => "top10_kids_name_status", "description" => "Top Names on ${comment} List", "type" => "name","data" => $top10_kids_name_status )) ;
 	}
 
 	// Method to return top 10 toys in year
@@ -120,7 +120,7 @@ class Result {
                                        );
 			array_push($top10_toys_year, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_toys_$year", "description" => "Top 10 Toys in $year", "type" => "toy","data" => $top10_toys_year )) ;
+		array_push($this->array_appender, array("name" => "top10_toys_$year", "description" => "Top Toys in $year", "type" => "toy","data" => $top10_toys_year )) ;
 	}
 
 	// Method to return top 10 toys in year
@@ -138,7 +138,7 @@ class Result {
                                        );
 			array_push($top10_toys_year_country, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_toys_${year}_${country}", "description" => "Top 10 Toys for ${year} in ${country}","type" => "toy", "data" => $top10_toys_year_country )) ;
+		array_push($this->array_appender, array("name" => "top10_toys_${year}_${country}", "description" => "Top Toys for ${year} in ${country}","type" => "toy", "data" => $top10_toys_year_country )) ;
 	}
 
 	// Method to return top 10 toys wanted by kids with certain status
@@ -161,7 +161,7 @@ class Result {
                                        );
 			array_push($top10_toys_status, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_toys_${status}", "description" => "Top 10 Toys wanted by ${comment} Kids", "type" => "toy", "data" => $top10_toys_status )) ;
+		array_push($this->array_appender, array("name" => "top10_toys_${status}", "description" => "Top Toys wanted by ${comment} Kids", "type" => "toy", "data" => $top10_toys_status )) ;
 	}
 
 	// Method to return top 10 toys for kids from/to
@@ -178,7 +178,7 @@ class Result {
                                        );
 			array_push($top10_toys_age, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_toys_${from}to${to}", "description" => "Top 10 Toys wanted by kids ${from}-${to}", "type" => "toy", "data" => $top10_toys_age )) ;
+		array_push($this->array_appender, array("name" => "top10_toys_${from}to${to}", "description" => "Top Toys wanted by kids ${from}-${to}", "type" => "toy", "data" => $top10_toys_age )) ;
 	}
 
 	function return_json() {
