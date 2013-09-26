@@ -161,6 +161,43 @@ class Result {
 		$result->close() ;
 	}
 
+	// Method to return top 10 kids with status
+	function top10kids_by_status($status) {
+		echo "<H4>top10kids_by_status($status)</H4>" ;
+		/* Create Table */
+		echo "<table border=1>" ;
+		
+		/* fetch column names */
+		echo "<th>Name</th><th>Count</th>" ;
+		
+		
+		$query = "
+          SELECT SUBSTRING_INDEX(name,' ',1) as name,
+                 count(*) AS cnt, status
+          FROM (select distinct device_id, SUBSTRING_INDEX(name,' ',1) as name, status from prefs ) combine
+          WHERE name <> ''
+            AND status='$status'
+            AND device_id NOT IN
+              (SELECT device_id
+               FROM banned)
+            AND LOWER(name) NOT regexp
+              (SELECT group_concat(word SEPARATOR '|')
+               FROM banned_words)
+          GROUP BY name
+          ORDER BY cnt DESC LIMIT 10;
+" ;
+		$result = $this->db->query($query) or die(mysql_error());
+		/* fetch object array */
+		while ($row = $result->fetch_row()) {
+			echo "<tr>" ;
+			printf ("<td>%s</td><td>%s</td>", $row[0], $row[1]);
+			echo "</tr>" ;
+		}
+		echo "</table>" ;
+		
+		$result->close() ;
+	}
+
 	// Method to return top 10 toys in 2013
 	function top10toys_by_year($year) {
 		echo "<H4>top10toys_by_year($year)</H4>" ;
@@ -215,7 +252,10 @@ $api->tracking();
 $api->phone();
 $api->top10toys();
 $api->top10toys_by_year(2013);
+$api->top10kids_by_status('R');;
 $api->good_and_bad_percentage();
 $api->pref_updates();
 
 ?>
+
+
