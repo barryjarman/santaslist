@@ -208,16 +208,16 @@ class Result {
 $api = new Result;
 
 # List top 10 toys
-$api->f_top10_toys();
+#$api->f_top10_toys();
 
 # List top 10 toys past month
 $api->f_top10_toys_time("1 MONTH", "Past month", "month");
 
 # List top 10 toys past week
-$api->f_top10_toys_time("1 WEEK", "Past week", "week");
+#$api->f_top10_toys_time("1 WEEK", "Past week", "week");
 
 # List top 10 toys today
-$api->f_top10_toys_time("1 DAY", "Past day", "day");
+#$api->f_top10_toys_time("1 DAY", "Past day", "day");
 
 # list good bad percentages
 $api->f_percent_good_bad();
@@ -247,7 +247,7 @@ $api->f_top10_toys_age(3,6);
 $api->f_top10_toys_age(6,9);
 
 # List top 10 toys this year in USA
-$api->f_top10_toys_year_country(date("Y"),"US");
+#$api->f_top10_toys_year_country(date("Y"),"US");
 
 $api->return_json();
 
