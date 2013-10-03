@@ -207,29 +207,28 @@ class Result {
 
 $api = new Result;
 
+### NOT USED FUNCTIONS
 # List top 10 toys
 #$api->f_top10_toys();
-
-# List top 10 toys past month
-$api->f_top10_toys_time("1 MONTH", "Past month", "month");
-
 # List top 10 toys past week
 #$api->f_top10_toys_time("1 WEEK", "Past week", "week");
-
 # List top 10 toys today
 #$api->f_top10_toys_time("1 DAY", "Past day", "day");
+# List top 10 toys this year in USA
+#$api->f_top10_toys_year_country(date("Y"),"US");
 
+
+
+
+# USED FUNCTIONS
 # list good bad percentages
 $api->f_percent_good_bad();
 
-# Top 10 names on good list
-$api->f_top10_kids_name_status('g');
-
-# Top 10 names on naughty list
-$api->f_top10_kids_name_status('n');
-
-# List top 10 toys 2013
+# List top toys 2013
 $api->f_top10_toys_year("2013");
+
+# List top 10 toys past month
+$api->f_top10_toys_time("1 MONTH", "Past month", "month");
 
 # Top toys wanted by good kids
 $api->f_top10_toys_status("g");
@@ -237,17 +236,20 @@ $api->f_top10_toys_status("g");
 # Top toys wanted by bad kids
 $api->f_top10_toys_status("n");
 
-# Top 10 toys for 0-3's
+# Top toys for 0-3's
 $api->f_top10_toys_age(0,3);
 
-# Top 10 toys for 3-6's
+# Top toys for 3-6's
 $api->f_top10_toys_age(3,6);
 
-# Top 10 toys for 6-9's
+# Top toys for 6-9's
 $api->f_top10_toys_age(6,9);
 
-# List top 10 toys this year in USA
-#$api->f_top10_toys_year_country(date("Y"),"US");
+# Top names on good list
+$api->f_top10_kids_name_status('g');
+
+# Top names on naughty list
+$api->f_top10_kids_name_status('n');
 
 $api->return_json();
 
