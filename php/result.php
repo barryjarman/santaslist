@@ -94,7 +94,7 @@ class Result {
 		}
 		
 		
-		$query = "SELECT id, device_id, uses, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM tracking order by update_time" ;
+		$query = "SELECT id, device_id, uses, CONVERT_TZ( update_time, '+00:00', '+05:00') FROM tracking order by update_time DESC limit 10" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($trow = $result->fetch_row()) {
@@ -148,7 +148,7 @@ class Result {
 		echo "<th>Toy</th><th>Count</th>" ;
 		
 		
-		$query = "select toy,count(*) as cnt from prefs where device_id not in (select device_id from banned_device_ids) group by toy order by cnt DESC LIMIT 10 ;" ;
+		$query = "select toy,count(*) as cnt from prefs where device_id not in (select device_id from banned_device_ids) AND toy <> '' group by toy having cnt >= 3 order by cnt DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
@@ -208,7 +208,7 @@ class Result {
 		echo "<th>Toy</th><th>Count</th>" ;
 		
 		
-		$query = "select toy,count(*) as cnt from prefs where YEAR (update_time) = $year AND device_id not in (select device_id from banned_device_ids) group by toy order by cnt DESC LIMIT 10 ;" ;
+		$query = "select toy,count(*) as cnt from prefs where YEAR (update_time) = $year AND device_id not in (select device_id from banned_device_ids) AND toy <> '' group by toy having cnt >= 3 order by cnt DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
