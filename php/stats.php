@@ -116,7 +116,7 @@ class Result {
                                        );
 			array_push($top10_kids_name_status, $jsonRow) ;
                 }
-		array_push($this->array_appender, array("name" => "top10_kids_name_status", "description" => "Top Names on ${comment} List", "type" => "name","data" => $top10_kids_name_status )) ;
+		array_push($this->array_appender, array("name" => "top10_kids_name_${status}", "description" => "Top Names on ${comment} List", "type" => "name","data" => $top10_kids_name_status )) ;
 	}
 
 	// Method to return top 10 toys in year
