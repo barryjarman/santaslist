@@ -37,17 +37,20 @@ class Result {
 		
 		/* fetch column names */
 		
+		printf ("<tr><th colspan=\"10\">Prefs</th><th colspan=\"6\">Phone</th><th colspan=\"2\">Uses</th></tr>") ;
 		while ($row = $headings->fetch_row()) {
 			printf ("<th>%s</th>", $row[0]);
 		}
+
+		printf ("<th>Make</th><th>Model</th><th>Country</th><th>SDK</th><th>App Version</th><th>Last Update</th><th>Uses</th><th>Last Update</th>") ;
 		
 		
-		$query = "SELECT id,device_id,shared_code,pref_id,name,age,toy,photo,status,CONVERT_TZ( update_time, '+00:00', '+05:00') FROM prefs where device_id not in (select device_id from banned_device_ids) order by update_time DESC LIMIT 10 ;" ;
+		$query = "select prefs.id, prefs.device_id, prefs.shared_code, prefs.pref_id, prefs.name, prefs.age, prefs.toy, prefs.photo, prefs.status, CONVERT_TZ(prefs.update_time , '+00:00', '+05:00'), phone.make, phone.model, phone.country, phone.sdk, phone.app_version, CONVERT_TZ( phone.update_time, '+00:00', '+05:00') ,tracking.uses, CONVERT_TZ(tracking.update_time, '+00:00', '+05:00') from prefs, phone, tracking where prefs.device_id = phone.device_id and prefs.device_id = tracking.device_id order by prefs.update_time DESC LIMIT 10 ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
 			echo "<tr>" ;
-			printf ("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>", $row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9]);
+			printf ("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>", $row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[11], $row[12], $row[13], $row[14], $row[15], $row[16], $row[17]);
 			echo "</tr>" ;
 		}
 		echo "</table>" ;
@@ -231,7 +234,7 @@ class Result {
 		echo "<th>List</th><th>Count</th><th>Percentage</th>" ;
 		
 		
-		$query = "select status, count(status) as Total, count(status) / (select count(status) from prefs) * 100 as Percent from prefs group by status ;" ;
+		$query = "select status, count(status) as Total , count(status) / (select count(status) from prefs where status = 'g' or status = 'n') * 100 as Percent from prefs where status = 'g' or status = 'n' group by status ;" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
