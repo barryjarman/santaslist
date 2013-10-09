@@ -45,7 +45,32 @@ class Result {
 		printf ("<th>Make</th><th>Model</th><th>Country</th><th>SDK</th><th>App Version</th><th>Last Update</th><th>Uses</th><th>Last Update</th>") ;
 		
 		
-		$query = "select prefs.id, prefs.device_id, prefs.shared_code, prefs.pref_id, prefs.name, prefs.age, prefs.toy, prefs.photo, prefs.status, CONVERT_TZ(prefs.update_time , '+00:00', '+05:00'), phone.make, phone.model, phone.country, phone.sdk, phone.app_version, CONVERT_TZ( phone.update_time, '+00:00', '+05:00') ,tracking.uses, CONVERT_TZ(tracking.update_time, '+00:00', '+05:00') from prefs, phone, tracking where prefs.device_id = phone.device_id and prefs.device_id = tracking.device_id order by prefs.update_time DESC LIMIT 10 ;" ;
+		$query = "
+SELECT prefs.id,
+       prefs.device_id,
+       prefs.shared_code,
+       prefs.pref_id,
+       prefs.name,
+       prefs.age,
+       prefs.toy,
+       prefs.photo,
+       prefs.status,
+       CONVERT_TZ(prefs.update_time , '+00:00', '+05:00'),
+       phone.make,
+       phone.model,
+       phone.country,
+       phone.sdk,
+       phone.app_version,
+       CONVERT_TZ(phone.update_time, '+00:00', '+05:00') ,
+       tracking.uses,
+       CONVERT_TZ(tracking.update_time, '+00:00', '+05:00')
+FROM prefs,
+     phone,
+     tracking
+WHERE prefs.device_id = phone.device_id
+  AND prefs.device_id = tracking.device_id
+ORDER BY prefs.update_time DESC LIMIT 10 ;
+" ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
 		while ($row = $result->fetch_row()) {
