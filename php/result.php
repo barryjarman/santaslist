@@ -69,7 +69,9 @@ FROM prefs,
      tracking
 WHERE prefs.device_id = phone.device_id
   AND prefs.device_id = tracking.device_id
-ORDER BY prefs.update_time DESC LIMIT 10 ;
+GROUP BY prefs.id 
+ORDER BY prefs.id DESC LIMIT 10  ;
+
 " ;
 		$result = $this->db->query($query) or die(mysql_error());
 		/* fetch object array */
