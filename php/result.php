@@ -277,7 +277,7 @@ ORDER BY prefs.id DESC LIMIT 10  ;
 }
 
 $api = new Result;
-$api->prefs();
+#$api->prefs();
 $api->tracking();
 $api->phone();
 $api->top10toys();
